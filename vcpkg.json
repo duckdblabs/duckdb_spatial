@@ -16,6 +16,25 @@
       "name": "proj",
       "default-features": false,
       "version>=": "9.5.1"
+    },
+    {
+      "name": "gdal",
+      "default-features": false,
+      "version>=": "3.10.0#2",
+      "platform": "!wasm32 & !ios & !android",
+      "features": [
+        "geos",
+        "expat",
+        "sqlite3",
+        {
+          "name": "curl",
+          "platform": "!wasm32 & !ios & !android"
+        },
+        {
+          "name": "openssl",
+          "platform": "!wasm32 & !ios & !android"
+        }
+      ]
     }
   ],
   "vcpkg-configuration": {

@@ -88,6 +88,15 @@ public:
 		return is_eof ? TRUE : FALSE;
 	}
 
+	void ClearErr() override {
+		// TODO
+	}
+
+	int Error() override {
+		return 0;
+		// TODO
+	}
+
 	size_t Write(const void *pBuffer, size_t nSize, size_t nCount) override {
 		size_t written_bytes = 0;
 		try {
@@ -140,6 +149,7 @@ public:
 	string AddPrefix(const string &value) {
 		return client_prefix + value;
 	}
+
 
 	VSIVirtualHandle *Open(const char *prefixed_file_name, const char *access, bool bSetError,
 	                       CSLConstList /* papszOptions */) override {

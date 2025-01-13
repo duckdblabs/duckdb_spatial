@@ -29,7 +29,7 @@ jobs:
       duckdb_version: main
       extension_name: spatial
       ci_tools_version: main
-      vcpkg_commit: 5e5d0e1cd7785623065e77eff011afdeec1a3574
+      vcpkg_commit: d7112d1a4fb50410d3639f5f586972591d848beb
       exclude_archs: 'linux_amd64_musl'
 
   duckdb-latest-deploy:
