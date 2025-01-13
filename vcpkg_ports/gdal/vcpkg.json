@@ -10,6 +10,10 @@
     "json-c",
     "libgeotiff",
     {
+      "name": "pkgconf",
+      "host": true
+    },
+    {
       "name": "proj",
       "default-features": false,
       "features": [
@@ -26,6 +30,10 @@
     },
     {
       "name": "vcpkg-cmake-config",
+      "host": true
+    },
+    {
+      "name": "vcpkg-pkgconfig-get-modules",
       "host": true
     },
     "zlib"
