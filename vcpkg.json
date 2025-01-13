@@ -1,8 +1,44 @@
 {
+  "builtin-baseline": "d7112d1a4fb50410d3639f5f586972591d848beb",
   "dependencies": [
     "openssl",
     "zlib",
     "geographiclib",
-    "geos"
-  ]
+    "geos",
+    "expat",
+    {
+      "name": "curl",
+      "platform": "!wasm32 & !ios & !android",
+      "features": ["openssl"],
+      "default-features": false
+    },
+    {
+      "name": "proj",
+      "default-features": false,
+      "version>=": "9.5.1"
+    },
+    {
+      "name": "gdal",
+      "default-features": false,
+      "version>=": "3.10.0#2",
+      "features": [
+        "geos",
+        "expat",
+        "sqlite3",
+        {
+          "name": "curl",
+          "platform": "!wasm32 & !ios & !android"
+        },
+        {
+          "name": "openssl",
+          "platform": "!wasm32 & !ios & !android"
+        }
+      ]
+    }
+  ],
+  "vcpkg-configuration": {
+    "overlay-ports": [
+      "./vcpkg_ports"
+    ]
+  }
 }

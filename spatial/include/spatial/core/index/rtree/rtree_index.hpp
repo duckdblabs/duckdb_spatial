@@ -43,10 +43,7 @@ public:
 public:
 	//! Called when data is appended to the index. The lock obtained from InitializeLock must be held
 	ErrorData Append(IndexLock &lock, DataChunk &entries, Vector &row_identifiers) override;
-	//! Verify that data can be appended to the index without a constraint violation
-	void VerifyAppend(DataChunk &chunk) override;
-	//! Verify that data can be appended to the index without a constraint violation using the conflict manager
-	void VerifyAppend(DataChunk &chunk, ConflictManager &conflict_manager) override;
+
 	//! Deletes all data from the index. The lock obtained from InitializeLock must be held
 	void CommitDrop(IndexLock &index_lock) override;
 	//! Delete a chunk of entries from the index. The lock obtained from InitializeLock must be held
@@ -63,9 +60,6 @@ public:
 
 	//! Traverses an RTreeIndex and vacuums the qualifying nodes. The lock obtained from InitializeLock must be held
 	void Vacuum(IndexLock &state) override;
-
-	//! Performs constraint checking for a chunk of input data
-	void CheckConstraintsForChunk(DataChunk &input, ConflictManager &conflict_manager) override;
 
 	//! Returns the string representation of the RTreeIndex, or only traverses and verifies the index
 	string VerifyAndToString(IndexLock &state, const bool only_verify) override;

@@ -41,34 +41,34 @@ add_library(${EXTENSION_NAME} STATIC ${EXTENSION_SOURCES})
 # local (compatible) GDAL installation, we should use that instead of building
 # our own. (unless a static build is requested)
 
-if(NOT EXISTS ${CMAKE_BINARY_DIR}/deps)
-  execute_process(
-    # Generate project
-    COMMAND
-      ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} -DDUCKDB_ENABLE_DEPRECATED_API=1
-      -DWASM_LOADABLE_EXTENSIONS=1 -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-      -DOSX_BUILD_ARCH=${OSX_BUILD_ARCH}
-      -DSPATIAL_USE_NETWORK=${SPATIAL_USE_NETWORK}
-      -DOPENSSL_ROOT_DIR=$ENV{OPENSSL_ROOT_DIR}
-      -DVCPKG_MANIFEST_DIR='${VCPKG_MANIFEST_DIR}'
-      -DVCPKG_INSTALLED_DIR='${CMAKE_BINARY_DIR}/vcpkg_installed'
-      -DCMAKE_TOOLCHAIN_FILE='${CMAKE_TOOLCHAIN_FILE}'
-      -DVCPKG_TARGET_TRIPLET='${VCPKG_TARGET_TRIPLET}'
-      -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE='${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}' -S
-      ${CMAKE_CURRENT_SOURCE_DIR}/deps -B ${CMAKE_BINARY_DIR}/deps
-    RESULT_VARIABLE DEPENDENCIES_GENERATE_RESULT)
-  if(NOT DEPENDENCIES_GENERATE_RESULT EQUAL 0)
-    message(FATAL_ERROR "Could not generate dependencies project")
-  endif()
-
-  execute_process(
-    # Build project
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/deps --config
-            ${CMAKE_BUILD_TYPE} RESULT_VARIABLE DEPENDENCIES_BUILD_RESULT)
-  if(NOT DEPENDENCIES_BUILD_RESULT EQUAL 0)
-    message(FATAL_ERROR "Could not build dependencies project")
-  endif()
-endif()
+#if(NOT EXISTS ${CMAKE_BINARY_DIR}/deps)
+#  execute_process(
+#    # Generate project
+#    COMMAND
+#      ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} -DDUCKDB_ENABLE_DEPRECATED_API=1
+#      -DWASM_LOADABLE_EXTENSIONS=1 -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+#      -DOSX_BUILD_ARCH=${OSX_BUILD_ARCH}
+#      -DSPATIAL_USE_NETWORK=${SPATIAL_USE_NETWORK}
+#      -DOPENSSL_ROOT_DIR=$ENV{OPENSSL_ROOT_DIR}
+#      -DVCPKG_MANIFEST_DIR='${VCPKG_MANIFEST_DIR}'
+#      -DVCPKG_INSTALLED_DIR='${CMAKE_BINARY_DIR}/vcpkg_installed'
+#      -DCMAKE_TOOLCHAIN_FILE='${CMAKE_TOOLCHAIN_FILE}'
+#      -DVCPKG_TARGET_TRIPLET='${VCPKG_TARGET_TRIPLET}'
+#      -DVCPKG_CHAINLOAD_TOOLCHAIN_FILE='${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}' -S
+#      ${CMAKE_CURRENT_SOURCE_DIR}/deps -B ${CMAKE_BINARY_DIR}/deps
+#    RESULT_VARIABLE DEPENDENCIES_GENERATE_RESULT)
+#  if(NOT DEPENDENCIES_GENERATE_RESULT EQUAL 0)
+#    message(FATAL_ERROR "Could not generate dependencies project")
+#  endif()
+#
+#  execute_process(
+#    # Build project
+#    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/deps --config
+#            ${CMAKE_BUILD_TYPE} RESULT_VARIABLE DEPENDENCIES_BUILD_RESULT)
+#  if(NOT DEPENDENCIES_BUILD_RESULT EQUAL 0)
+#    message(FATAL_ERROR "Could not build dependencies project")
+#  endif()
+#endif()
 
 # annoyingly for expat on windows
 set(CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES} MD.lib)
@@ -86,14 +86,14 @@ if(EMSCRIPTEN)
   set(OPENSSL_USE_STATIC_LIBS OFF)
 endif()
 
-find_library(SQLITE3_MEMVFS memvfs)
 find_package(ZLIB REQUIRED)
 find_package(PROJ REQUIRED)
-find_package(SQLite3 REQUIRED)
+# find_package(SQLite3 REQUIRED)
 find_package(GEOS REQUIRED)
 find_package(GDAL REQUIRED)
 find_package(EXPAT REQUIRED)
 find_package(GeographicLib REQUIRED)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 # Important: The link order matters, its the reverse order of dependency
 set(EXTENSION_DEPENDENCIES
@@ -101,9 +101,8 @@ set(EXTENSION_DEPENDENCIES
     GEOS::geos_c
     PROJ::proj
     EXPAT::EXPAT
-    SQLite::SQLite3
+    unofficial::sqlite3::sqlite3
     ZLIB::ZLIB
-    ${SQLITE3_MEMVFS}
     ${GeographicLib_LIBRARIES})
 
 if(SPATIAL_USE_NETWORK)
