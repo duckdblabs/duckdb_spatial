@@ -7,7 +7,7 @@
     {
       "name": "curl",
       "platform": "!wasm32 & !ios & !android",
-      "features": ["openssl", "sectransp"],
+      "features": ["openssl"],
       "default-features": false
     }
   ]
