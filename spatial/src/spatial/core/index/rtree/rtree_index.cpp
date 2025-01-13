@@ -203,14 +203,6 @@ ErrorData RTreeIndex::Append(IndexLock &lock, DataChunk &appended_data, Vector &
 	return Insert(lock, expr_chunk, row_identifiers);
 }
 
-void RTreeIndex::VerifyAppend(DataChunk &chunk) {
-	// There is nothing to verify here as we dont support constraints anyway
-}
-
-void RTreeIndex::VerifyAppend(DataChunk &chunk, ConflictManager &conflict_manager) {
-	// There is nothing to verify here as we dont support constraints anyway
-}
-
 void RTreeIndex::Delete(IndexLock &lock, DataChunk &input, Vector &rowid_vec) {
 	const auto count = input.size();
 
@@ -289,10 +281,6 @@ bool RTreeIndex::MergeIndexes(IndexLock &state, BoundIndex &other_index) {
 }
 
 void RTreeIndex::Vacuum(IndexLock &state) {
-}
-
-void RTreeIndex::CheckConstraintsForChunk(DataChunk &input, ConflictManager &conflict_manager) {
-	throw NotImplementedException("RTreeIndex::CheckConstraintsForChunk() not implemented");
 }
 
 string RTreeIndex::VerifyAndToString(IndexLock &state, const bool only_verify) {
