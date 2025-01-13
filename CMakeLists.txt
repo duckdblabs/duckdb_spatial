@@ -86,14 +86,14 @@ if(EMSCRIPTEN)
   set(OPENSSL_USE_STATIC_LIBS OFF)
 endif()
 
-find_library(SQLITE3_MEMVFS memvfs)
 find_package(ZLIB REQUIRED)
 find_package(PROJ REQUIRED)
-find_package(SQLite3 REQUIRED)
+# find_package(SQLite3 REQUIRED)
 find_package(GEOS REQUIRED)
 find_package(GDAL REQUIRED)
 find_package(EXPAT REQUIRED)
 find_package(GeographicLib REQUIRED)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 # Important: The link order matters, its the reverse order of dependency
 set(EXTENSION_DEPENDENCIES
@@ -101,9 +101,8 @@ set(EXTENSION_DEPENDENCIES
     GEOS::geos_c
     PROJ::proj
     EXPAT::EXPAT
-    SQLite::SQLite3
+    unofficial::sqlite3::sqlite3
     ZLIB::ZLIB
-    ${SQLITE3_MEMVFS}
     ${GeographicLib_LIBRARIES})
 
 if(SPATIAL_USE_NETWORK)

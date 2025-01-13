@@ -1,4 +1,5 @@
 {
+  "builtin-baseline": "d7112d1a4fb50410d3639f5f586972591d848beb",
   "dependencies": [
     "openssl",
     "zlib",
@@ -10,6 +11,11 @@
       "platform": "!wasm32 & !ios & !android",
       "features": ["openssl"],
       "default-features": false
+    },
+    {
+      "name": "proj",
+      "default-features": false,
+      "version>=": "9.5.1"
     }
   ],
   "vcpkg-configuration": {
