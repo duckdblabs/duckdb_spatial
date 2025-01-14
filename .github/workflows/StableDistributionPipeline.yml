@@ -29,7 +29,7 @@ jobs:
       duckdb_version: v1.1.3
       extension_name: spatial
       ci_tools_version: revert-cmake-version
-      override_ci_tools_repository: https://github.com/Maxxen/extension-ci-tools.git
+      override_ci_tools_repository: Maxxen/extension-ci-tools
       vcpkg_commit: 5e5d0e1cd7785623065e77eff011afdeec1a3574
       exclude_archs: 'linux_amd64;linux_amd64_gcc4;linux_amd64_musl;osx_amd64;osx_arm64;windows_amd64;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads'
 
@@ -41,7 +41,7 @@ jobs:
     with:
       duckdb_version: v1.1.3
       ci_tools_version: revert-cmake-version
-      override_ci_tools_repository: https://github.com/Maxxen/extension-ci-tools.git
+      override_ci_tools_repository: Maxxen/extension-ci-tools
       extension_name: spatial
       deploy_latest: ${{ startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/v1.1.3' }}
       exclude_archs: 'linux_amd64;linux_amd64_gcc4;linux_amd64_musl;osx_amd64;osx_arm64;windows_amd64;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads'
