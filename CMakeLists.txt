@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+cmake_policy(SET CMP0132 OLD)
+
 # Set extension name here
 set(TARGET_NAME spatial)
 set(EXTENSION_NAME ${TARGET_NAME}_extension)

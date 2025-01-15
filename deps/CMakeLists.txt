@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
+cmake_policy(SET CMP0132 OLD)
+
 project(dependecies-build)
 
 # Install and build dependencies locally
