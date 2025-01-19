@@ -1,0 +1,26 @@
+
+require spatial
+
+# There may be a better way to test this eventually, but today it's hard to
+# write these tests without a way to read and write Arrow streams or files.
+# This uses https://github.com/paleolimbot/duckdb-nanoarrow, which may be
+# superceeded by something else (or improved and released, depending!)
+require nanoarrow
+
+# Check that exporting Arrow data before registering extensions doesn't result
+# in an WKB extension type
+
+# Check that importing Arrow data with GeoArrow extension types doesn't result
+# in a geometry column
+
+
+query I
+CALL register_geoarrow_extensions()
+----
+true
+
+# Check that exporting Arrow data before registering extensions doesn't result
+# in a WKB extension type
+
+# Check that importing Arrow data with GeoArrow extension types doesn't result
+# in a geometry column

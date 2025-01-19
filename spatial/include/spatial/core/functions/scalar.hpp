@@ -236,6 +236,10 @@ private:
 	static void RegisterStMMin(DatabaseInstance &db);
 };
 
+bool WKBToGeometryCast(Vector &source, Vector &result, idx_t count, CastParameters &parameters);
+
+bool GeometryToWKBCast(Vector &source, Vector &result, idx_t count, CastParameters &parameters);
+
 } // namespace core
 
 } // namespace spatial

@@ -1,0 +1,14 @@
+
+require spatial
+
+# Extensions are not registered by default
+query I
+CALL register_geoarrow_extensions()
+----
+true
+
+# Attempting to reregister them will return false, indicating they were already loaded
+query I
+CALL register_geoarrow_extensions()
+----
+false
